@@ -1,0 +1,18 @@
+export const bikesData = [
+   { id: 1, location: "Downtown Montreal", available: true },
+   { id: 2, location: "Downtown Montreal", available: false },
+   { id: 3, location: "Downtown Montreal", available: true },
+   { id: 4, location: "Downtown Montreal", available: true },
+   { id: 5, location: "Downtown Montreal", available: false },
+   { id: 6, location: "Downtown Montreal", available: true },
+   { id: 7, location: "Downtown Montreal", available: true },
+   { id: 8, location: "Little Italy", available: false },
+   { id: 9, location: "Little Italy", available: false },
+   { id: 10, location: "Little Italy", available: false },
+   { id: 11, location: "Little Italy", available: true },
+   { id: 12, location: "Little Italy", available: true },
+   { id: 13, location: "Little Italy", available: true },
+   { id: 14, location: "Little Maghreb", available: true },
+   { id: 15, location: "Little Maghreb", available: true },
+   { id: 16, location: "Little Maghreb", available: true },
+];
