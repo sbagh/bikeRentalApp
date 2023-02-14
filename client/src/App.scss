@@ -35,6 +35,27 @@ $error_red: #a0000d;
   align-items: center;
 
   img {
-      margin-right: 8px;
+    margin-right: 8px;
   }
+}
+
+.search-bar {
+  text-align: center;
+  margin: 3rem 0;
+
+  h2 {
+    font-size: 3rem;
+    color: $primary_gold;
+  }
+
+  select {
+    width: 60%;
+  }
+}
+
+.city-dropdown {
+  border-radius: 50px;
+  padding: 1rem;
+  border: 2px solid $primary_gold;
+  position: relative;
 }
