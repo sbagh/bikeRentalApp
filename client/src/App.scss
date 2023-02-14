@@ -20,3 +20,21 @@ $error_red: #a0000d;
   border-radius: 30px;
   margin: auto;
 }
+
+.navbar {
+  padding: 1rem 2rem;
+  background-color: #fff;
+  border-bottom: 1px solid #3333;
+  display: flex;
+  justify-content: space-between;
+}
+
+.profile-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  img {
+      margin-right: 8px;
+  }
+}
