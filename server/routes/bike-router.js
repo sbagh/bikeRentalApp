@@ -1,11 +1,11 @@
 const express = require("express");
 
-const BikeCtrl = require("../controllers/actions");
+const BikeControl = require("../controllers/actions");
 
 const router = express.Router();
 
-router.post("/bike", BikeCtrl.createBike);
-router.put("/bike/:id", BikeCtrl.updateBike);
-router.get("/bikes", BikeCtrl.getBikes);
+router.post("/bike", BikeControl.createBike);
+router.put("/bike/:id", BikeControl.updateBike);
+router.get("/bikes", BikeControl.getBikes);
 
 module.exports = router;
