@@ -83,6 +83,21 @@ const UsersPage = () => {
     });
   };
 
+  let dashboardButtons;
+
+  dashboardButtons = isPicked ? (
+    <>
+      <button className="btn report-button">Report</button>
+      <button className="btn pick-and-return-button">Return</button>
+    </>
+  ) : (
+    <button
+      className="btn pick-and-return-button"
+      onClick={() => reserveBike(selectedBike._id)}>
+      Pick it up
+    </button>
+  );
+
   return (
     <>
       <div className="main-container">
@@ -151,6 +166,8 @@ const UsersPage = () => {
                   </ul>
                 </>
               )}
+
+              <div className="btn-container">{dashboardButtons}</div>
             </div>
           </div>
         )}

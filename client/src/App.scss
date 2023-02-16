@@ -59,3 +59,49 @@ $error_red: #a0000d;
   border: 2px solid $primary_gold;
   position: relative;
 }
+
+.details-wrapper {
+  border: 2px solid $primary_gold;
+  border-radius: 20px;
+  width: 100%;
+  max-width: 600px;
+  margin: auto;
+  padding: 3rem 5rem;
+  display: flex;
+}
+
+.bike-details {
+  margin-left: 3rem;
+
+  h2 {
+    color: $primary_gold;
+  }
+}
+
+.btn {
+  color: #fff;
+  border: none;
+  border-radius: 7px;
+  padding: 0.5rem 1rem;
+  font-size: 16px;
+
+  &:disabled {
+    background-color: #999 !important;
+    opacity: 0.5;
+  }
+}
+
+.btn-container {
+  display: flex;
+  justify-content: right;
+  margin-top: 2rem;
+}
+
+.pick-and-return-button {
+  background-color: $primary_gold;
+}
+
+.report-button {
+  background-color: $error_red;
+  margin-right: 0.5rem;
+}

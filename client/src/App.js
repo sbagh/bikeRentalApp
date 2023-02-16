@@ -8,11 +8,11 @@ function App() {
   return (
     <>
       <div className="app-container">
-      <Navbar /> 
+        <Navbar />
         <div className="outlet-container">
           <Routes>
-            <Route path="/user-dashboard" element={<UsersPage />} />
-            <Route path="/admin-dashboard" element={<AdminPage />} />
+            <Route path="/" element={<UsersPage />} />
+            <Route path="/admin" element={<AdminPage />} />
           </Routes>
         </div>
       </div>
