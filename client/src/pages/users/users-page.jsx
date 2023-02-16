@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
-import { getAllBikes } from "../../api/index";
+import { getAllBikes, getBikeById, updateBikeById } from "../../api/index";
+import uuid from "react-uuid";
+import bikeImg from "../../assest/bike.png";
 
 const UsersPage = () => {
   const [bikes, setBikes] = useState([]);
@@ -49,6 +51,53 @@ const UsersPage = () => {
     setSelectedBike(randomBike);
   };
 
+  const reserveBike = async (id) => {
+    const createReservationId = uuid();
+    const generateCustomerId = uuid();
+    setIsPicked(true);
+    const body = {
+      customerId: generateCustomerId,
+      bikeLocation: selectedBike.bikeLocation,
+      reservationStatus: true,
+      reservationId: createReservationId,
+    };
+    await updateBikeById(id, body);
+    // To get the reservationId for the selected bike
+    await getBikeById(id)
+      .then((value) => {
+        return value.data;
+      })
+      .then((val) => setSelectedBike(val.data));
+  };
+
+  const returnBike = async (returnedLocation) => {
+    const body = {
+      customerId: null,
+      bikeLocation: returnedLocation,
+      reservationStatus: false,
+      reservationId: null,
+    };
+    await updateBikeById(selectedBike._id, body).then((val) => {
+      setIsPicked(false);
+      setSelectedBike(null);
+    });
+  };
+
+  let dashboardButtons;
+
+  dashboardButtons = isPicked ? (
+    <>
+      <button className="btn report-button">Report</button>
+      <button className="btn pick-and-return-button">Return</button>
+    </>
+  ) : (
+    <button
+      className="btn pick-and-return-button"
+      onClick={() => reserveBike(selectedBike._id)}>
+      Pick it up
+    </button>
+  );
+
   return (
     <>
       <div className="main-container">
@@ -93,6 +142,35 @@ const UsersPage = () => {
               })}
           </select>
         </div>
+
+        {selectedBike && (
+          <div className="details-wrapper">
+            <img src={bikeImg} width="200" height="200" alt="bike photo" />
+            <div className="bike-details">
+              <h2>Bike details</h2>
+              <h3>Bike Id: {selectedBike._id}</h3>
+              {!!isPicked && (
+                <>
+                  <h3>Reservation Id: </h3>
+                  <p>{selectedBike.reservationId}</p>
+                </>
+              )}
+              <h3>Location: {selectedBike.bikeLocation}</h3>
+              {selectedBike.reports.length >= 1 && (
+                <>
+                  <h3>Reports: </h3>
+                  <ul>
+                    {selectedBike.reports.map((report, i) => {
+                      if (!!report) return <li key={i}>{report}</li>;
+                    })}
+                  </ul>
+                </>
+              )}
+
+              <div className="btn-container">{dashboardButtons}</div>
+            </div>
+          </div>
+        )}
       </div>
     </>
   );
