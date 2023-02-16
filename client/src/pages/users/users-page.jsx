@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { getAllBikes, getBikeById, updateBikeById } from "../../api/index";
 import uuid from "react-uuid";
 import bikeImg from "../../assest/bike.png";
+import Dialog from "../../components/dialog/dialog";
 
 const UsersPage = () => {
   const [bikes, setBikes] = useState([]);
@@ -109,17 +110,36 @@ const UsersPage = () => {
       .then((val) => setSelectedBike(val.data));
   };
 
+  const openDialog = (dialog) => {
+    dialog(true);
+  };
+
+  const closeDialog = (dialog) => {
+    dialog(false);
+  };
+
   let dashboardButtons;
 
   dashboardButtons = isPicked ? (
     <>
-      <button className="btn report-button">Report</button>
-      <button className="btn pick-and-return-button">Return</button>
+      <button
+        className="btn report-button"
+        onClick={() => openDialog(setOpenReportDialog)}
+      >
+        Report
+      </button>
+      <button
+        className="btn pick-and-return-button"
+        onClick={() => openDialog(setOpenReturnDialog)}
+      >
+        Return
+      </button>
     </>
   ) : (
     <button
       className="btn pick-and-return-button"
-      onClick={() => reserveBike(selectedBike._id)}>
+      onClick={() => reserveBike(selectedBike._id)}
+    >
       Pick it up
     </button>
   );
@@ -132,7 +152,8 @@ const UsersPage = () => {
           <select
             disabled={isPicked}
             className="city-dropdown"
-            onChange={handleSelect}>
+            onChange={handleSelect}
+          >
             <option value={null} disabled selected>
               Please select the location
             </option>
@@ -151,7 +172,8 @@ const UsersPage = () => {
                       <option
                         key={i}
                         value={location}
-                        disabled={!inventoryCounts}>
+                        disabled={!inventoryCounts}
+                      >
                         {location} - available bikes: {inventoryCounts}
                       </option>
                     )}
@@ -159,7 +181,8 @@ const UsersPage = () => {
                       <option
                         key={i}
                         value={location}
-                        disabled={!inventoryCounts}>
+                        disabled={!inventoryCounts}
+                      >
                         {location} - There is no available bikes here
                       </option>
                     )}
@@ -191,6 +214,33 @@ const UsersPage = () => {
                     })}
                   </ul>
                 </>
+              )}
+
+              <dialog id="dialog" />
+
+              {openReturnDialog && (
+                <Dialog
+                  id={selectedBike._id}
+                  text={"Return the bike"}
+                  onClosePopup={(boolean, returnedLocation) =>
+                    boolean
+                      ? closeDialog(setOpenReturnDialog)
+                      : returnBike(returnedLocation)
+                  }
+                  getBikesLocation={getBikesLocation}
+                />
+              )}
+
+              {openReportDialog && (
+                <Dialog
+                  id={selectedBike._id}
+                  text={"Report the bike"}
+                  onClosePopup={(boolean, report) =>
+                    boolean
+                      ? closeDialog(setOpenReportDialog)
+                      : reportBike(report)
+                  }
+                />
               )}
 
               <div className="btn-container">{dashboardButtons}</div>

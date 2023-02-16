@@ -2,109 +2,109 @@ $primary_gold: #eb8b0e;
 $error_red: #a0000d;
 
 .app-container {
-   min-height: 100vh;
-   height: 100%;
-   background-image: linear-gradient(to right bottom, #fb940e, #995b0e);
+  min-height: 100vh;
+  height: 100%;
+  background-image: linear-gradient(to right bottom, #fb940e, #995b0e);
 }
 
 .outlet-container {
-   padding: 3rem 0;
+  padding: 3rem 0;
 }
 .main-container {
-   width: 90%;
-   max-width: 1200px;
-   min-height: 700px;
-   height: 100%;
-   background-color: #fff;
-   border: 2px solid #3333;
-   border-radius: 30px;
-   margin: auto;
+  width: 90%;
+  max-width: 1200px;
+  min-height: 700px;
+  height: 100%;
+  background-color: #fff;
+  border: 2px solid #3333;
+  border-radius: 30px;
+  margin: auto;
 }
 
 .navbar {
-   padding: 1rem 2rem;
-   background-color: #fff;
-   border-bottom: 1px solid #3333;
-   display: flex;
-   justify-content: space-between;
+  padding: 1rem 2rem;
+  background-color: #fff;
+  border-bottom: 1px solid #3333;
+  display: flex;
+  justify-content: space-between;
 }
 
 .profile-wrapper {
-   display: flex;
-   justify-content: center;
-   align-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
-   img {
-      margin-right: 8px;
-   }
+  img {
+    margin-right: 8px;
+  }
 }
 
 .search-bar {
-   text-align: center;
-   margin: 3rem 0;
+  text-align: center;
+  margin: 3rem 0;
 
-   h2 {
-      font-size: 3rem;
-      color: $primary_gold;
-   }
+  h2 {
+    font-size: 3rem;
+    color: $primary_gold;
+  }
 
-   select {
-      width: 60%;
-   }
+  select {
+    width: 60%;
+  }
 }
 
 .city-dropdown {
-   border-radius: 50px;
-   padding: 1rem;
-   border: 2px solid $primary_gold;
-   position: relative;
+  border-radius: 50px;
+  padding: 1rem;
+  border: 2px solid $primary_gold;
+  position: relative;
 }
 .bike-table {
-   border-collapse: collapse;
-   width: 100%;
+  border-collapse: collapse;
+  width: 100%;
 }
 
 .bike-table th,
 .bike-table td {
-   border: 1px solid #ddd;
-   text-align: center;
-   padding: 10px;
-   font-weight: normal;
+  border: 1px solid #ddd;
+  text-align: center;
+  padding: 10px;
+  font-weight: normal;
 }
 
 .bike-table th {
-   background-color: #f2f2f2;
-   font-weight: bold;
+  background-color: #f2f2f2;
+  font-weight: bold;
 }
 
 .bike-table caption {
-   font-size: 24px;
-   font-weight: bold;
-   margin-bottom: 10px;
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 10px;
 }
 
 .bike-table td:first-child {
-   font-weight: bold;
-   text-align: left;
+  font-weight: bold;
+  text-align: left;
 }
 
 .bike-table tr:nth-child(even) {
-   background-color: #f2f2f2;
+  background-color: #f2f2f2;
 }
 
 .bike-table thead th {
-   padding-top: 12px;
-   padding-bottom: 12px;
+  padding-top: 12px;
+  padding-bottom: 12px;
 }
 
 .bike-table tfoot th {
-   background-color: #f2f2f2;
-   text-align: left;
+  background-color: #f2f2f2;
+  text-align: left;
 }
 
 .bike-table tfoot td {
-   font-weight: bold;
-   text-align: left;
+  font-weight: bold;
+  text-align: left;
 }
 
 .details-wrapper {
@@ -151,4 +151,41 @@ $error_red: #a0000d;
 .report-button {
   background-color: $error_red;
   margin-right: 0.5rem;
+}
+
+.popup {
+  // To make it fixed till the user confirm or cancel the operation
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.popup_inner {
+  // center the popup
+  position: absolute;
+  left: 50%;
+  bottom: 50%;
+  transform: translate(-50%, -50%);
+
+  background: white;
+  min-width: 300px;
+  max-width: 500px;
+  height: fit-content;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  padding: 2rem;
+  border-radius: 15px;
+
+  input {
+    padding: 0.5rem 1rem;
+    border-radius: 10px;
+    border: 2px solid $primary_gold;
+  }
 }
