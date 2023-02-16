@@ -12,19 +12,19 @@ const AdminPage = () => {
          .finally();
    }, [bikes]);
 
-   function reservationStatusLogic(bikeReservationStatus) {
+   const reservationStatusLogic = (bikeReservationStatus) => {
       if (!bikeReservationStatus) {
          return "available";
       } else {
          return "bike reserved";
       }
-   }
+   };
 
-   function displayReports(bikeReportsArray) {
-      if (bikeReportsArray.length === 0) {
+   const displayReports = (bikeReportsArray) => {
+      if (!bikeReportsArray.length) {
          return "no reports";
       }
-   }
+   };
 
    return (
       <>
