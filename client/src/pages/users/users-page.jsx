@@ -9,6 +9,10 @@ const UsersPage = () => {
 
   const [isPicked, setIsPicked] = useState(false);
 
+  // to show /hide dialogs
+  const [openReturnDialog, setOpenReturnDialog] = useState(false);
+  const [openReportDialog, setOpenReportDialog] = useState(false);
+
   useEffect(() => {
     getAllBikes()
       .then((value) => value.data)
@@ -60,8 +64,10 @@ const UsersPage = () => {
       bikeLocation: selectedBike.bikeLocation,
       reservationStatus: true,
       reservationId: createReservationId,
+      ...selectedBike,
     };
     await updateBikeById(id, body);
+
     // To get the reservationId for the selected bike
     await getBikeById(id)
       .then((value) => {
@@ -76,11 +82,31 @@ const UsersPage = () => {
       bikeLocation: returnedLocation,
       reservationStatus: false,
       reservationId: null,
+      ...selectedBike,
     };
     await updateBikeById(selectedBike._id, body).then((val) => {
+      setOpenReturnDialog(false);
       setIsPicked(false);
       setSelectedBike(null);
     });
+  };
+
+  const reportBike = async (newReport) => {
+    selectedBike.reports.push(newReport);
+    const body = {
+      bikeLocation: selectedBike.bikeLocation, // required
+      reservationStatus: selectedBike.reservationStatus, // required
+      reports: selectedBike.reports,
+      ...selectedBike,
+    };
+    await updateBikeById(selectedBike._id, body).then((val) => {
+      setOpenReportDialog(false);
+    });
+    await getBikeById(selectedBike._id)
+      .then((value) => {
+        return value.data;
+      })
+      .then((val) => setSelectedBike(val.data));
   };
 
   let dashboardButtons;
