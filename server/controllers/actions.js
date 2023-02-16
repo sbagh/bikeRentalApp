@@ -11,6 +11,7 @@ createBike = (req, res) => {
     });
   }
 
+  // instantiate the Bike class
   const bike = new Bike(body);
 
   if (!bike) {
@@ -34,6 +35,7 @@ createBike = (req, res) => {
     });
 };
 
+// udpate a single bike based on id
 updateBike = async (req, res) => {
   const body = req.body;
 
@@ -44,6 +46,7 @@ updateBike = async (req, res) => {
     });
   }
 
+  // find the bike through its id
   Bike.findOne({ _id: req.params.id }, (err, Bike) => {
     if (err) {
       return res.status(404).json({
@@ -77,6 +80,7 @@ updateBike = async (req, res) => {
   });
 };
 
+// get all bikes
 getBikes = async (req, res) => {
   await Bike.find({}, (err, Bikes) => {
     if (err) {
