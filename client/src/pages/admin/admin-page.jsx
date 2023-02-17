@@ -2,10 +2,14 @@ import { useEffect, useState } from "react";
 import { getAllBikes } from "../../api/index";
 
 const AdminPage = () => {
+   //  store bikes in a state as an array
    const [bikes, setBikes] = useState([]);
+   //  get all bikes from mongoDB
    useEffect(() => {
       getAllBikes()
-         .then((value) => value.data)
+         .then((value) => {
+            return value.data;
+         })
          .then((val) => {
             setBikes(val.data);
          })

@@ -11,7 +11,7 @@ function App() {
         <Navbar />
         <div className="outlet-container">
           <Routes>
-            <Route path="/" element={<UsersPage />} />
+            <Route path="/" exact element={<UsersPage />} />
             <Route path="/admin" element={<AdminPage />} />
           </Routes>
         </div>

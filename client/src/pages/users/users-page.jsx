@@ -5,9 +5,11 @@ import bikeImg from "../../assest/bike.png";
 import Dialog from "../../components/dialog/dialog";
 
 const UsersPage = () => {
+   //  store bikes in a state as an array
    const [bikes, setBikes] = useState([]);
+   // store selected bike in a object state
    const [selectedBike, setSelectedBike] = useState(null);
-
+   // boolean to store whether bike is selected or not
    const [isPicked, setIsPicked] = useState(false);
 
    // to show /hide dialogs
@@ -32,20 +34,16 @@ const UsersPage = () => {
       { location: "Point-claire", count: 0 },
    ];
 
+   // add a callback for each bike
    bikes.forEach((bike) => {
-      // to check if the address is exist by returning a Boolean
-      const addressExist = getBikesLocation.some(
-         (b) => b.location === bike.bikeLocation
-      );
-
-      if (addressExist) {
-         getBikesLocation.filter((bikesLocation) => {
-            if (bikesLocation.location === bike.bikeLocation) {
-               return bikesLocation.count++;
-            }
-         });
-      }
+      getBikesLocation.filter((bikesLocation) => {
+         if (bikesLocation.location === bike.bikeLocation) {
+            return bikesLocation.count++;
+         }
+      });
    });
+
+   // assign a random bike from the selected location
    const handleSelect = (e) => {
       const selectedLocation = e.target.value;
       const bikesByLocation = bikes.filter(
@@ -56,10 +54,13 @@ const UsersPage = () => {
       setSelectedBike(randomBike);
    };
 
+   // send reserveBike details to mongoDB
    const reserveBike = async (id) => {
+      // generate a random ID for reservation and customer
       const createReservationId = uuid();
       const generateCustomerId = uuid();
       setIsPicked(true);
+      // payload to send
       const body = {
          ...selectedBike,
          customerId: generateCustomerId,
@@ -67,6 +68,7 @@ const UsersPage = () => {
          reservationStatus: true,
          reservationId: createReservationId,
       };
+      // send the payload to update the bike details in mongoDB
       await updateBikeById(id, body);
 
       // To get the reservationId for the selected bike
@@ -77,6 +79,7 @@ const UsersPage = () => {
          .then((val) => setSelectedBike(val.data));
    };
 
+   // return bike to a selected location
    const returnBike = async (returnedLocation) => {
       const body = {
          ...selectedBike,
@@ -110,6 +113,7 @@ const UsersPage = () => {
          .then((val) => setSelectedBike(val.data));
    };
 
+   // reusable function for Report and Return dialogues
    const openDialog = (dialog) => {
       dialog(true);
    };
@@ -118,9 +122,7 @@ const UsersPage = () => {
       dialog(false);
    };
 
-   let dashboardButtons;
-
-   dashboardButtons = isPicked ? (
+   const dashboardButtons = isPicked ? (
       <>
          <button
             className="btn report-button"
@@ -169,21 +171,13 @@ const UsersPage = () => {
                         return (
                            <>
                               {inventoryCounts && (
-                                 <option
-                                    key={i}
-                                    value={location}
-                                    disabled={!inventoryCounts}
-                                 >
+                                 <option key={i} value={location}>
                                     {location} - available bikes:{" "}
                                     {inventoryCounts}
                                  </option>
                               )}
                               {!inventoryCounts && (
-                                 <option
-                                    key={i}
-                                    value={location}
-                                    disabled={!inventoryCounts}
-                                 >
+                                 <option key={i} value={location} disabled>
                                     {location} - There is no available bikes
                                     here
                                  </option>
@@ -196,16 +190,11 @@ const UsersPage = () => {
 
             {selectedBike && (
                <div className="details-wrapper">
-                  <img
-                     src={bikeImg}
-                     width="200"
-                     height="200"
-                     alt="bike photo"
-                  />
+                  <img src={bikeImg} width="200" height="200" alt="bike" />
                   <div className="bike-details">
                      <h2>Bike details</h2>
                      <h3>Bike Id: {selectedBike._id}</h3>
-                     {!!isPicked && (
+                     {isPicked && (
                         <>
                            <h3>Reservation Id: </h3>
                            <p>{selectedBike.reservationId}</p>
@@ -222,8 +211,6 @@ const UsersPage = () => {
                            </ul>
                         </>
                      )}
-
-                     <dialog id="dialog" />
 
                      {openReturnDialog && (
                         <Dialog
