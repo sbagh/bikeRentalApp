@@ -19,6 +19,7 @@ $error_red: #a0000d;
   border: 2px solid #3333;
   border-radius: 30px;
   margin: auto;
+  padding-bottom: 40px;
 }
 
 .navbar {
@@ -33,9 +34,14 @@ $error_red: #a0000d;
   display: flex;
   justify-content: center;
   align-items: center;
+  text-decoration: none;
 
   img {
     margin-right: 8px;
+  }
+
+  p {
+    color: #000;
   }
 }
 
@@ -62,6 +68,10 @@ $error_red: #a0000d;
 .bike-table {
   border-collapse: collapse;
   width: 100%;
+
+  &-container {
+    padding: 2rem;
+  }
 }
 
 .bike-table th,

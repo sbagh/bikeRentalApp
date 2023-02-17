@@ -27,8 +27,8 @@ const AdminPage = () => {
    };
 
    return (
-      <>
-         <div className="main-container">
+      <div className="main-container">
+         <div className="bike-table-container">
             <table className="bike-table">
                <caption>Bike Inventory</caption>
 
@@ -55,7 +55,7 @@ const AdminPage = () => {
                </tbody>
             </table>
          </div>
-      </>
+      </div>
    );
 };
 
