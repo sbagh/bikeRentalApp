@@ -23,6 +23,14 @@ const AdminPage = () => {
    const displayReports = (bikeReportsArray) => {
       if (!bikeReportsArray.length) {
          return "no reports";
+      } else {
+         return (
+            <ul>
+               {bikeReportsArray.map((report) => (
+                  <li>{report}</li>
+               ))}
+            </ul>
+         );
       }
    };
 
@@ -44,12 +52,12 @@ const AdminPage = () => {
                   {" "}
                   {bikes.map((bike, i) => (
                      <tr key={i}>
-                        <th>{bike._id}</th>
-                        <th>{bike.bikeLocation}</th>
-                        <th>
+                        <td>{bike._id}</td>
+                        <td>{bike.bikeLocation}</td>
+                        <td>
                            {reservationStatusLogic(bike.reservationStatus)}
-                        </th>
-                        <th>{displayReports(bike.reports)}</th>
+                        </td>
+                        <td>{displayReports(bike.reports)}</td>
                      </tr>
                   ))}
                </tbody>
